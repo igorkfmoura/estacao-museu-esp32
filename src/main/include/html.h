@@ -13,4 +13,13 @@
     <p>pressure: %.02f Pa</p>\
     <p>altitude %.02f m</p>\
   </body>\
+  <script>\
+    let options = {\
+        method:'GET',\
+    }\
+  fetch('/getdata',options)\
+  .then((response) => {\
+      console.log(response);\
+  });\
+  </script>\
 </html>"
