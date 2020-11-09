@@ -7,14 +7,15 @@
 
 Adafruit_BME280 bme; // I2C
 
-void BMP280Setup() 
+void BMP280Setup()
 {
-  if (!bme.begin(0x76)) {
+  if (!bme.begin(0x76))
+  {
     Serial.println(F("Could not find a valid BMP280 sensor, check wiring!"));
-    while (1);
+    while (1)
+      ;
   }
 }
-
 
 float BMP280ReadTemperature()
 {
@@ -29,4 +30,9 @@ float BMP280ReadPressure()
 float BMP280ReadAltitude()
 {
   return bme.readAltitude(1013.25);
+}
+
+float BMP280ReadHumidity()
+{
+  return bme.readHumidity();
 }

@@ -39,12 +39,34 @@ int openDb(char *filename, sqlite3 **db)
     return rc;
 }
 
+int dbClear(sqlite3 *db)
+{
+    int rc = sqlite3_exec(db, "DROP TABLE museu", callback, (void *)data, &zErrMsg);
+    if (rc != SQLITE_OK)
+    {
+        sqlite3_close(db);
+        Serial.println("Table already exists or  Error on creating 'museu' table");
+    }
+}
+
+int dbSetup(sqlite3 *db)
+{
+    int rc = sqlite3_exec(db, "CREATE TABLE IF NOT EXISTS museu (Hora_UTC varchar(20),Temperatura float,Humidade float,Pressão float,Luminosidade float, Co2 float, Poeira float)", callback, (void *)data, &zErrMsg);
+    if (rc != SQLITE_OK)
+    {
+        sqlite3_close(db);
+        Serial.println("Table already exists or  Error on creating 'museu' table");
+    }
+
+    return rc;
+}
+
 //  Main functions
 
 //  Test functions
-int writeOnDB(float data_list[], sqlite3 *db)
+int writeOnDB(const char *date, float data_list[], sqlite3 *db)
 {
-    char *sql = "INSERT INTO museu1 VALUES(?,?,?)";
+    char *sql = "INSERT INTO museu VALUES(?, ?, ?, ?, ?, ?, ?)";
     rc = sqlite3_prepare_v2(db, sql, strlen(sql), &res, &tail);
     if (rc != SQLITE_OK)
     {
@@ -55,15 +77,14 @@ int writeOnDB(float data_list[], sqlite3 *db)
         return 0;
     }
 
+    // date
+    sqlite3_bind_text(res, 1, date, strlen(date), SQLITE_STATIC);
+
+    // Float data
     int i;
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < sizeof(data_list); i++)
     {
-        Serial.print("index: ");
-        Serial.print(i);
-        Serial.print(" || ");
-        Serial.print("data: ");
-        Serial.println(data_list[i]);
-        sqlite3_bind_double(res, i + 1, data_list[i]);
+        sqlite3_bind_double(res, i + 2, data_list[i]);
     }
 
     if (sqlite3_step(res) != SQLITE_DONE)
@@ -89,7 +110,7 @@ int writeOnDB(float data_list[], sqlite3 *db)
 
 int readDB(sqlite3 *db)
 {
-    int rc = sqlite3_exec(db, "SELECT * FROM museu1", readDataHandler, (void *)data, &zErrMsg);
+    int rc = sqlite3_exec(db, "SELECT * FROM museu", readDataHandler, (void *)data, &zErrMsg);
     if (rc != SQLITE_OK)
     {
         Serial.printf("SQL error: %s\n", zErrMsg);

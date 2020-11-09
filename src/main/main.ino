@@ -10,6 +10,7 @@
 #include "include/BMP280.c"
 #include "include/webserver.c"
 #include "include/Database.c"
+#include "include/rtc.c"
 
 const char *ssid = "DNAModas";
 const char *password = "mengao81";
@@ -48,16 +49,16 @@ void setup() {
   sqlite3_initialize();
 
   // Open database
-  if (openDb("/sd/data/museu.db", &db1))
+  if(openDb("/sd/data/museu.db", &db1)){
     return;
-
-
+  }
+  
+  //dbClear(db); // Delete table museu
+  dbSetup(db1);
+  //rtcSetup();
   BMP280Setup();
   webServerSetup(db1);
-  
   //readDB(db1);
-
-  
 }
 
 void loop() {
@@ -70,9 +71,14 @@ void loop() {
 }
 
 void saveData(){
+  //String date_iso = rtcGetDate();
+  String date_iso = "09/11/2020T12:58";
   float temperature = BMP280ReadTemperature();
+  float humidity = BMP280ReadHumidity();
   float pressure = BMP280ReadPressure();
-  float altitude = BMP280ReadAltitude();
-  float datalist[3] = {temperature,pressure,altitude};
-  writeOnDB(datalist,db1);
+  float luminosity = analogRead(34);
+  float co = 0.0;
+  float dust = 0.0;
+  float datalist[6] = {temperature, humidity, pressure, luminosity, co, dust};
+  writeOnDB(date_iso.c_str(),datalist,db1);
 }

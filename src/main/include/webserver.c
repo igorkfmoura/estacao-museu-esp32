@@ -62,7 +62,7 @@ void handleDashboard()
   sqlite3_stmt *res;
   const char *tail;
   const char *data = "Callback function called";
-  char *sql = "SELECT * FROM museu1 ORDER BY rowid DESC LIMIT 10 ";
+  char *sql = "SELECT * FROM museu ORDER BY rowid DESC LIMIT 10 ";
   rc = sqlite3_prepare_v2(db, sql, strlen(sql), &res, &tail);
   if (rc != SQLITE_OK)
   {
@@ -82,16 +82,24 @@ void handleDashboard()
           #table{width:300px,height:100px}\
           </style><head><body><h1>Estação Ambiental Museu</h1>";
 
-  resp += "<br><table cellspacing='1' cellpadding='1' border='1' id='table'><tr><td>Temperatura</td><td>Pressão</td><td>Altitude</td></tr>";
+  resp += "<br><table cellspacing='1' cellpadding='1' border='1' id='table'><tr><td>Data<td>Temperatura</td><td>Humidade</td><td>Pressão</td><td>Luminosidade</td><td>Co2</td><td>Poeira</td></tr>";
   server.send(200, "text/html", resp.c_str());
   while (sqlite3_step(res) == SQLITE_ROW)
   {
     resp = "<tr><td>";
-    resp += sqlite3_column_double(res, 0);
+    resp += (const char *)sqlite3_column_text(res, 0);
     resp += "</td><td>";
     resp += sqlite3_column_double(res, 1);
     resp += "</td><td>";
     resp += sqlite3_column_double(res, 2);
+    resp += "</td><td>";
+    resp += sqlite3_column_double(res, 3);
+    resp += "</td><td>";
+    resp += sqlite3_column_double(res, 4);
+    resp += "</td><td>";
+    resp += sqlite3_column_double(res, 5);
+    resp += "</td><td>";
+    resp += sqlite3_column_double(res, 6);
     resp += "</td></tr>";
 
     server.sendContent(resp);
