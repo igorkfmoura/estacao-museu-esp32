@@ -35,7 +35,7 @@
       
       td,
       th {
-        padding: 1em;  
+        padding: .3em 1em;  
       }
       
 			ul {
@@ -72,17 +72,11 @@
 				height: 5em;
 			}
 
-			.button {
-				padding-left: 90px;
+			button {
+				margin: 0 auto;
+        display: block;
       }
 
-			button {
-				margin-left: 0.5em;
-			}
-      
-      #btn-ap-scan {
-        margin: 0 auto;
-      }
 		</style>
 	</head>
 
@@ -99,7 +93,7 @@
       </table>
       <button id="btn-ap-scan">Scan APs</button>
     </div>
-		<form id="formElem" action="/post" method="post">
+		<form id="form-elem" action="/post" method="post">
 			<ul>
 				<li>
 					<label for="ap-name">Access Point:</label>
@@ -110,7 +104,7 @@
 					<label for="ap-pass">Password:</label>
 					<input type="password" id="ap-pass" name="ap-pass" />
 				</li>
-				<li class="button">
+				<li>
 					<button type="submit">Connect</button>
 				</li>
 			</ul>
@@ -135,17 +129,17 @@
         //console.log(text);
         
         data = JSON.parse(text);
-        //console.log(data);
+        console.log(data);
         
         let tbody = document.getElementById("table-body");
         
         data.forEach(d => {
           let tr = document.createElement("tr");
           let ssid = document.createElement("td");
-          ssid.innerHTML = String(d.ssid);
+          ssid.innerHTML = String(d.SSID);
           
           let signal = document.createElement("td");
-          signal.innerHTML = String(d.rssi);
+          signal.innerHTML = String(d.RSSI);
           
           tr.appendChild(ssid);
           tr.appendChild(signal);
@@ -157,6 +151,29 @@
         button_scan.removeAttribute("disabled");
       };
       document.addEventListener("DOMContentLoaded", scanAPs);
+      
+      const form_elem = document.getElementById("form-elem");
+      form_elem.onsubmit = async (e) => {
+        e.preventDefault();
+        
+        let data = {
+          "ap-name": form_elem.querySelector("input[name='ap-name']").value,
+          "ap-pass": form_elem.querySelector("input[name='ap-pass']").value,
+        }
+        
+        console.log(JSON.stringify(data));
+        
+        let res = await fetch("/api/config", {
+                              method: "POST", 
+                              headers: {
+                                "Content-Type": "application/json",
+                              },
+                              body: JSON.stringify(data)
+                              });
+                              
+        let text = await res.text();
+        console.log("Response: " + text);
+      };
     </script>
 	</body>
 </html>
