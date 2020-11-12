@@ -30,7 +30,6 @@ protected:
     ArRequestHandlerFunction _onRequest;
     ArUploadHandlerFunction _onUpload;
     ArBodyHandlerFunction _onBody;
-    JSONVar _json;
     size_t _contentLength;
     size_t _maxContentLength;
     const char *_content;
@@ -52,9 +51,7 @@ public:
   }
   void setMethod(WebRequestMethodComposite method){ _method = method; }
   void onRequest(ArRequestHandlerFunction fn){ _onRequest = fn; }
-  
-  virtual JSONVar getJson() { return _json;}
-  
+    
   virtual bool canHandle(AsyncWebServerRequest *request) override final{
     if(!_onRequest)
       return false;
@@ -75,7 +72,7 @@ public:
   }
   
   virtual void handleBody(AsyncWebServerRequest *request, uint8_t *data, size_t len, size_t index, size_t total) override final {
-    Serial.println("handleBody");
+    //Serial.println("handleBody");
     if (_onRequest) {
       _contentLength = total;
       if (total > 0 && request->_tempObject == NULL && total < _maxContentLength) {
@@ -94,7 +91,7 @@ public:
       return;
     }
     
-    _json = JSON.parse(_content);
+    JSONVar _json = JSON.parse(_content);
     
     if (JSON.typeof(_json) == "undefined") {
       Serial.println("[ERROR] JSON parsing failed!");
@@ -110,6 +107,8 @@ public:
     
     //Serial.print("printing json: ");
     //Serial.println(_json);
+    
+    request->_tempObject = &_json;
     
     _onRequest(request);
   }

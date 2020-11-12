@@ -77,9 +77,9 @@ void setup() {
   json_handler->setUri("/api/config");
   json_handler->setMethod(HTTP_POST);
   json_handler->onRequest([](AsyncWebServerRequest * request) {
-    //Serial.println("in request");
+    Serial.println("in request");
 
-    JSONVar json = json_handler->getJson();
+    JSONVar json = *((JSONVar *)(request->_tempObject));
     Serial.println(json);
 
     JSONVar keys = json.keys();
