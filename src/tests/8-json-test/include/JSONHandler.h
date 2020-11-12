@@ -79,6 +79,7 @@ public:
         _content = (const char *) malloc(total);
       }
       if (_content != NULL) {
+        Serial.println("[ERROR] '_content' malloc failed");
         memcpy((uint8_t*)(_content) + index, data, len);
       }
     }
@@ -86,7 +87,12 @@ public:
   
   virtual void handleRequest(AsyncWebServerRequest *request) override final {
     //Serial.println("handleRequest");
-    if(!_onRequest) {
+    if (!_onRequest) {
+      request->send(501);
+      return;
+    }
+    
+    if (_content == NULL) {
       request->send(501);
       return;
     }

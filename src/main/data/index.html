@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Dashboard</title>
+    <link href="styles/all.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script defer src="scripts/index.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1>Estação Ambiental</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="config.html">Configurações</a></li>
+            <li><a href="creditos.html">Créditos</a></li>
+        </ul>
+    </nav>
+    <main>
+        <div class="query">
+            <h2>Filtros</h2>
+            <form>
+                <ul>
+                    <li>
+                        <label for="date">Data:<input type="date" id="date" name="date"
+                                placeholder="Exemplo: 01-01-2020" /></label>
+                    </li>
+                    <li>
+                        <label for="sample">Dados:<input type="text" id="sample" name="sample"
+                                placeholder="Exemplo: 10 ; 20 || dados" /></label>
+                    </li>
+                    <li>
+                        <label for="avg">Média:<input type="checkbox" id="avg" name="avg" /></label>
+                    </li>
+                    <li>
+                        <label for="cresc">Crescente:<input type="radio" id="cresc" name="cresc" /></label>
+                        <label for="desc">Decrescente:<input type="radio" id="desc" name="cresc" checked /></label>
+                    </li>
+                    <li>
+                        <button id="search">Buscar</button>
+                    </li>
+                </ul>
+            </form>
+        </div>
+        <div class="table">
+        </div>
+    </main>
+    <footer></footer>
+</body>
+
+</html>
