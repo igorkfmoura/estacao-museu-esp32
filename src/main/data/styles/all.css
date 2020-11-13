@@ -1,13 +1,38 @@
 *{
     margin: 0;
     padding: 0;
-}
-/* Header */
-header, nav {
-    background-color: grey;
+    box-sizing: border-box;
+    list-style: none;
 }
 
+ul{
+    margin-bottom: 0rem;
+    margin-bottom: 0rem;
+}
+
+li{
+    margin-bottom: 0em;
+}
+/* Components */
+
+body{
+    font-family: "Trebuchet MS", Verdana, sans-serif;
+    color: #333333;
+    font-size: 14px;
+}
+
+button{
+    padding: 0.2em 0.5em;
+    text-decoration: none;
+    border: 1px solid #bbbbbb;
+}
+button:hover{
+    background-color: #bbbbbb;
+}
+
+/* Header */
 header{
+    margin-top: 1em;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -17,6 +42,7 @@ header{
 nav{
     height: 40px;
     width: 100vw;
+    border-top:1px solid black;
     border-bottom: 1px solid black;
     display: flex;
     align-items: center;
@@ -27,12 +53,14 @@ nav ul {
     width: 100vw;
     list-style-type: none;
     display: flex;
-    flex-direction: row;
 }
 
 nav li{
+    display: block;
     text-align: center;
     align-items: center;
+    align-self: center;
+    height: 100%;
     flex: 1;
 }
 
@@ -43,54 +71,123 @@ nav a {
     color: black;
 }
 
+/* Footer */
+
+footer{
+    display: block;
+    border: 1px solid black;
+    text-align: center;
+    position: static;
+    width: 100vw;
+    bottom: 0;
+}
+
+footer p{
+    font-size: 8px;
+    margin: 1%;
+    font-weight: bolder;
+}
+
+footer a{
+    margin: 2%;
+    font-size: 12px;
+    text-decoration: none;
+    color: black;
+    padding: 1%;
+    border: 0.5px solid black;
+    background-color: rgb(230, 227, 227);
+}
 
 /* Filters */
 main{
-    display: flex;
-    flex-direction: column;
+    padding: 1em;
 }
 
-.query, .table{
+.filter_clicker{
+    border-bottom: 1px solid;
+    width: 100%;
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.filter_clicker h4{
+    margin-bottom: 0px;
+    padding-left: 1em;
+}
+
+.seta-baixo{
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+    width: 0; 
+    height: 0; 
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 11px solid black;
+  }
+
+.seta-cima {
+    content: "";
+    display: none;
+    vertical-align: middle;
+    margin-right: 10px;
+    width: 0; 
+    height: 0; 
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 11px solid black;
+}
+
+#filters{
+    display: none;
+}
+
+.table{
+    display: block;
     flex-direction: column;
     align-items: center;
-    border: 1px solid black;
     align-self: center;
-    width: 94vw;
+}
+
+
+.query ul *{
+    margin-bottom: 0px;
 }
 
 .query{
-    margin-top: 5%;
-    border: 1px solid black;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-}
-
-.query h2,.table h2{
-    padding-bottom:5% ;
+    margin: 0.5em;
+    border: 1px solid #999999;
+    border-radius: 5px;
 }
 
 .query ul{
     padding: 0;
-    display: flex;
-    flex-direction: row;
-    list-style-type: none;
-    flex-wrap: wrap;
+    display: block;
 }
 
 .query li{
     padding: 2%;
     display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    
 }
 
 .query label{
-    margin-right: 1vw;
+    margin-right: 0.5em;
     display: flex;
     align-items: center;
 }
+.query input{
+    margin-right: 1em;
+}
 
 #cresc{
-    margin-right:5vw;
+    margin-right:1em;
 }
 
 /* Table */
@@ -101,7 +198,6 @@ table {
     width: 100%;
     margin: 0 auto;
     margin-bottom: 1em;
-    font-size: 10px;
   }
   
   table th {
@@ -145,12 +241,26 @@ table {
 
 /* Database config */
 .db_config{
+    display: block; /* hide and unhide (block ; none)*/
     align-self: center;
-    display: flex; /* hide and unhide (flex ; none)*/
-    flex-direction: column;
-    width: 95vw;
-    border: 1px solid black;
-    
+    width: 100%;
+    border: 1px solid black; 
+}
+
+.db_config ul{
+    margin-top: 1.2em;
+    width: 100%;
+    display: block;
+}
+.db_config li{
+    display: flex;
+    width: 100%;
+    margin-bottom: 1em;
+    justify-content: center;
+}
+
+.db_config button{
+    width: 80%;
 }
 
 #db_nav{
@@ -168,27 +278,42 @@ table {
 }
 
 .db_config button{
-    align-self: center;
     margin-bottom: 3%;
-    width: 95vw;
     height: 35px;
+    text-align: center;
+}
+
+.db_config label{
+    font-size: 18px;
+    margin-bottom: 3%;
 }
 
 /* Wi-fi config */
 .wifi_config{
-    padding-top: 3%;
-    width: 95vw;
+    display: none; /* hide and unhide (block ; none)*/
     align-self: center;
-    display: none; /* hide and unhide (flex ; none)*/
-    flex-direction: column;
-    border: 1px solid black;
+    width: 100%;
+    border: 1px solid black; 
+}
+
+.wifi_config ul{
+    padding-top: 1em;
+    width: 100%;
+    display: block;
+    justify-content: center;
 }
 
 .wifi_config button{
     align-self: center;
     margin-bottom: 3%;
-    width: 95vw;
     height: 35px;
+}
+
+.wifi_config li{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
 }
 
 .wifi_config label{

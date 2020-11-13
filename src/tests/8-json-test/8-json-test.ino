@@ -13,11 +13,15 @@
 #include "include/JSONHandler.h"
 
 JSONHandler* json_handler;
+JSONHandler* json_handler2;
 
 AsyncWebServer server(80);
 
-const char* ssid = "LIVE TIM_AWAR_2G";
-const char* password = "5Ea668fC62";
+//const char* ssid = "LIVE TIM_AWAR_2G";
+//const char* password = "5Ea668fC62";
+const char* ssid = "DNAModas";
+const char* password = "mengao81";
+
 
 const char* PARAM_MESSAGE = "message";
 
@@ -91,7 +95,7 @@ void setup() {
 
     Serial.println();
     request->send(200);
-    
+
     WiFi.disconnect();
     WiFi.begin(json["ap-name"], json["ap-pass"]);
     while (WiFi.waitForConnectResult() != WL_CONNECTED) {
@@ -104,6 +108,20 @@ void setup() {
     Serial.println(WiFi.localIP());
 
   });
+
+  json_handler2 = new JSONHandler();
+
+  json_handler2->setUri("/api/db_config");
+  json_handler2->setMethod(HTTP_POST);
+  json_handler2->onRequest([](AsyncWebServerRequest * request) {
+    Serial.println("in request");
+
+    JSONVar json = *((JSONVar *)(request->_tempObject));
+    Serial.println(json);
+
+  });
+
+
 
   server.addHandler(json_handler);
 

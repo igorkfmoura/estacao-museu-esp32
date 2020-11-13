@@ -10,8 +10,10 @@
 
 AsyncWebServer server(80);
 
-const char* ssid = "LIVE TIM_AWAR_2G";
-const char* password = "5Ea668fC62";
+//const char* ssid = "LIVE TIM_AWAR_2G";
+//const char* password = "5Ea668fC62";
+const char* ssid = "DNAModas";
+const char* password = "mengao81";
 
 const char* PARAM_MESSAGE = "message";
 

@@ -8,14 +8,14 @@ function setupEvents() {
         let wifi_config = document.getElementsByClassName("wifi_config")[0];
         db_config.style.display = "none";
         db_nav.style.backgroundColor = "#FFF"
-        wifi_config.style.display = "flex";
+        wifi_config.style.display = "block";
         wifi_nav.style.backgroundColor = "grey"
     })
 
     db_nav.addEventListener("click", () => {
         let db_config = document.getElementsByClassName("db_config")[0];
         let wifi_config = document.getElementsByClassName("wifi_config")[0];
-        db_config.style.display = "flex";
+        db_config.style.display = "block";
         db_nav.style.backgroundColor = "grey"
         wifi_config.style.display = "none";
         wifi_nav.style.backgroundColor = "#FFF"
@@ -29,7 +29,7 @@ function setupEvents() {
         let data_to_send = {};
         data_to_send.sample = document.getElementById("data_sample").value;
         //console.log(data_to_send)
-        sendFilters("http://192.168.0.123:3000/db_config/sample_time", data_to_send)
+        sendFilters("http://192.168.0.63/api/db_config", data_to_send)
     });
 
     let download_db = document.getElementById("download_db");

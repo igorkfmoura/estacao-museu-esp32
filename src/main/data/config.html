@@ -4,6 +4,8 @@
 <head>
     <meta charset="utf-8">
     <title>Configurações</title>
+    <link href="styles/normalize.css" rel="stylesheet">
+    <link href="styles/skeleton.css" rel="stylesheet">
     <link href="styles/all.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <script defer src="scripts/config.js"></script>
@@ -28,20 +30,48 @@
         </div>
 
         <form action="" class="db_config">
-            <p>Tempo de aquisição: <input type="text" placeholder="Exemplo: 1 ; 2 ; 3 segundos" id="data_sample"></p>
-            <button id="save_sample_time">Salvar alterações</button>
-            <button id="download_db">Donwload Banco de dados</button>
-            <button id="reset_config">Resetar para Configurações iniciais</button>
+            <ul>
+                <li id="text_db_config">
+                    <p>Tempo de aquisição:</p>
+                    <input type="text" placeholder="Exemplo: 1 ; 2 ; 3 segundos" id="data_sample">
+                </li>
+                <li>
+                    <button id="save_sample_time">Salvar alterações</button>
+                </li>
+                <li><button id="download_db">Donwload Banco de dados</button></li>
+                <li> <button id="reset_config">Resetar para Configurações iniciais</button></li>
+            </ul>
+
+
+
+
         </form>
 
         <form action="" class="wifi_config">
-            <label for="ssid">SSID:<input type="text" placeholder="Nome da rede" id="ssid" name="ssid"></label>
-            <label for="pass">Senha:<input type="password" placeholder="Senha da rede" id="pass" name="pass"></label>
-            <button id="save_wifi_config">Salvar configurações</button>
+            <ul>
+                <li>
+                    <label for="ssid">SSID:</label>
+                    <input type="text" placeholder="Nome da rede" id="ssid" name="ssid">
+                </li>
+                <li>
+                    <label for="pass">Senha:</label>
+                    <input type="password" placeholder="Senha da rede" id="pass" name="pass">
+                </li>
+                <li>
+                    <button id="save_wifi_config">Salvar configurações</button>
+                </li>
+            </ul>
+
+
+
         </form>
 
     </main>
-    <footer></footer>
+    <footer>
+        <p>Sistema projetado por alunos do curso de Engenharia de Controle e Automação da instituição CEFET-RJ</p>
+        <p>Desenvolvido para Projeto de Controle Ambiental de Museu</p>
+        <p>ESTA PÁGINA NÃO POSSUI FINS LUCRATIVOS</p>
+    </footer>
 </body>
 
 </html>

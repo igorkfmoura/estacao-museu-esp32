@@ -4,6 +4,8 @@
 <head>
     <meta charset="utf-8">
     <title>Dashboard</title>
+    <link href="styles/normalize.css" rel="stylesheet">
+    <link href="styles/skeleton.css" rel="stylesheet">
     <link href="styles/all.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <script defer src="scripts/index.js"></script>
@@ -22,23 +24,29 @@
     </nav>
     <main>
         <div class="query">
-            <h2>Filtros</h2>
-            <form>
+            <div class="filter_clicker">
+                <h4>Filtros</h4>
+                <div class="seta-baixo"></div>
+                <div class="seta-cima"></div>
+            </div>
+            <form id="filters">
                 <ul>
                     <li>
-                        <label for="date">Data:<input type="date" id="date" name="date"
-                                placeholder="Exemplo: 01-01-2020" /></label>
+                        <label for="date_from">De:</label>
+                        <input type="date" id="date_from" name="date_from" placeholder="Exemplo: 01-01-2020" />
+                        <label for="date_to">Até:</label>
+                        <input type="date" id="date_to" name="date_to" placeholder="Exemplo: 01-01-2020" />
+
                     </li>
                     <li>
-                        <label for="sample">Dados:<input type="text" id="sample" name="sample"
-                                placeholder="Exemplo: 10 ; 20 || dados" /></label>
+                        <label for="sample">Dados:</label>
+                        <input type="text" id="sample" name="sample" placeholder="Exemplo: 10 ; 20 || dados" />
                     </li>
                     <li>
-                        <label for="avg">Média:<input type="checkbox" id="avg" name="avg" /></label>
-                    </li>
-                    <li>
-                        <label for="cresc">Crescente:<input type="radio" id="cresc" name="cresc" /></label>
-                        <label for="desc">Decrescente:<input type="radio" id="desc" name="cresc" checked /></label>
+                        <label for="cresc">Crescente:</label>
+                        <input type="radio" id="cresc" name="cresc" />
+                        <label for="desc">Decrescente:</label>
+                        <input type="radio" id="desc" name="cresc" checked />
                     </li>
                     <li>
                         <button id="search">Buscar</button>
@@ -49,7 +57,11 @@
         <div class="table">
         </div>
     </main>
-    <footer></footer>
+    <footer>
+        <p>Sistema projetado por alunos do curso de Engenharia de Controle e Automação da instituição CEFET-RJ</p>
+        <p>Desenvolvido para Projeto de Controle Ambiental de Museu</p>
+        <p>ESTA PÁGINA NÃO POSSUI FINS LUCRATIVOS</p>
+    </footer>
 </body>
 
 </html>

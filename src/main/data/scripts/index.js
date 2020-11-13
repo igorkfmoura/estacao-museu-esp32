@@ -178,12 +178,33 @@ function eventSetup() {
         e.preventDefault();
 
         let data_to_send = {};
-        data_to_send.date = document.getElementById("date").value;
+        data_to_send.date_from = document.getElementById("date_from").value;
+        data_to_send.date_to = document.getElementById("date_to").value;
         data_to_send.sample = document.getElementById("sample").value;
-        data_to_send.avg = document.getElementById("avg").checked;
         data_to_send.desc = document.getElementById("desc").checked;
+        console.log(data_to_send);
+        //sendFilters("http://192.168.0.123:3000/search", data_to_send);
+    })
 
-        sendFilters("http://192.168.0.123:3000/search", data_to_send);
+    let filter_clicker = document.getElementsByClassName("filter_clicker")[0];
+    var filter_on = false;
+    filter_clicker.addEventListener("click", () => {
+        let seta_cima = document.getElementsByClassName("seta-cima")[0];
+        let seta_baixo = document.getElementsByClassName("seta-baixo")[0];
+        let filters_tab = document.getElementById("filters");
+        if (filter_on) {
+            seta_cima.style.display = "none";
+            seta_baixo.style.display = "inline-block";
+            filters_tab.style.display = "none";
+            filter_on = false;
+        }
+        else {
+            seta_cima.style.display = "inline-block";
+            seta_baixo.style.display = "none";
+            filters_tab.style.display = "block";
+            filter_on = true;
+        }
+
     })
 }
 
