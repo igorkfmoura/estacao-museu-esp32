@@ -14,25 +14,14 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L esp32_devkit_v1:ESP32_DEVKIT_V1 U?
-U 1 1 5FB13BB6
-P 5250 2000
-F 0 "U?" H 5250 3215 50  0000 C CNN
-F 1 "ESP32_DEVKIT_V1" H 5250 3124 50  0000 C CNN
-F 2 "" H 5250 2100 50  0001 C CNN
-F 3 "" H 5250 2100 50  0001 C CNN
-	1    5250 2000
-	1    0    0    -1  
-$EndComp
-$Comp
 L igorkelvin:SDCard_Module A?
 U 1 1 5FB19464
-P 7450 3500
-F 0 "A?" H 8078 3596 50  0000 L CNN
-F 1 "SDCard_Module" H 8078 3505 50  0000 L CNN
-F 2 "" H 7400 4200 50  0001 C CNN
-F 3 "" H 7400 4200 50  0001 C CNN
-	1    7450 3500
+P 7500 3500
+F 0 "A?" H 8128 3596 50  0000 L CNN
+F 1 "SDCard_Module" H 8128 3505 50  0000 L CNN
+F 2 "" H 7450 4200 50  0001 C CNN
+F 3 "" H 7450 4200 50  0001 C CNN
+	1    7500 3500
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -46,128 +35,122 @@ F 3 "" H 6500 2700 50  0001 C CNN
 	1    7500 2500
 	1    0    0    -1  
 $EndComp
-Text Label 4400 2600 2    50   ~ 0
+Text Label 4500 2600 2    50   ~ 0
 SCL
 Wire Wire Line
-	4400 2600 4550 2600
-Text Label 4400 2300 2    50   ~ 0
+	4500 2600 4600 2600
+Text Label 4500 2300 2    50   ~ 0
 SDA
 Wire Wire Line
-	4400 2300 4550 2300
-Text Label 4400 1300 2    50   ~ 0
+	4500 2300 4600 2300
+Text Label 4500 1300 2    50   ~ 0
 3V3
 Wire Wire Line
-	4400 1300 4550 1300
-Text Label 4400 1400 2    50   ~ 0
+	4500 1300 4600 1300
+Text Label 4500 1400 2    50   ~ 0
 GND
 Wire Wire Line
-	4400 1400 4550 1400
+	4500 1400 4600 1400
 Text Label 6100 1300 0    50   ~ 0
 5V
 Wire Wire Line
-	6100 1300 5950 1300
-Text Label 6800 1300 2    50   ~ 0
+	6100 1300 6000 1300
+Text Label 6900 1300 2    50   ~ 0
 5V
 Wire Wire Line
-	6800 1300 6950 1300
+	6900 1300 7000 1300
 Text Label 6100 1400 0    50   ~ 0
 GND
 Wire Wire Line
-	6100 1400 5950 1400
-Text Label 6800 1400 2    50   ~ 0
+	6100 1400 6000 1400
+Text Label 6900 1400 2    50   ~ 0
 GND
 Wire Wire Line
-	6800 1400 6950 1400
+	6900 1400 7000 1400
 $Comp
 L senseair_s8_module:SenseAir_S8_Module A?
 U 1 1 5FB1BDE1
-P 7550 1500
-F 0 "A?" H 7550 1965 50  0000 C CNN
-F 1 "SenseAir_S8_Module" H 7550 1874 50  0000 C CNN
-F 2 "" H 7550 1400 50  0001 C CNN
-F 3 "" H 7550 1400 50  0001 C CNN
-	1    7550 1500
+P 7600 1500
+F 0 "A?" H 7600 1965 50  0000 C CNN
+F 1 "SenseAir_S8_Module" H 7600 1874 50  0000 C CNN
+F 2 "" H 7600 1400 50  0001 C CNN
+F 3 "" H 7600 1400 50  0001 C CNN
+	1    7600 1500
 	1    0    0    -1  
 $EndComp
-NoConn ~ 6950 1500
-NoConn ~ 6950 1600
-NoConn ~ 8150 1600
-NoConn ~ 8150 1300
+NoConn ~ 7000 1500
+NoConn ~ 7000 1600
+NoConn ~ 8200 1600
+NoConn ~ 8200 1300
 NoConn ~ 6800 2200
 NoConn ~ 6800 2300
-NoConn ~ 3950 3700
-Text Label 6650 2600 2    50   ~ 0
+NoConn ~ 3900 3700
+Text Label 6700 2600 2    50   ~ 0
 3V3
 Wire Wire Line
-	6800 2600 6650 2600
-Text Label 6650 2700 2    50   ~ 0
+	6800 2600 6700 2600
+Text Label 6700 2700 2    50   ~ 0
 GND
 Wire Wire Line
-	6650 2700 6800 2700
-Text Label 6650 2500 2    50   ~ 0
+	6700 2700 6800 2700
+Text Label 6700 2500 2    50   ~ 0
 SDA
 Wire Wire Line
-	6650 2500 6800 2500
+	6700 2500 6800 2500
 Wire Wire Line
-	6650 2400 6800 2400
-Text Label 6650 2400 2    50   ~ 0
+	6700 2400 6800 2400
+Text Label 6700 2400 2    50   ~ 0
 SCL
 Wire Wire Line
-	6650 3300 6500 3300
-Text Label 6500 3200 2    50   ~ 0
+	6700 3300 6600 3300
+Text Label 6600 3200 2    50   ~ 0
 GND
 Wire Wire Line
-	6500 3200 6650 3200
+	6600 3200 6700 3200
 Wire Wire Line
-	6650 3600 6500 3600
+	6700 3600 6600 3600
 Wire Wire Line
-	6500 3700 6650 3700
+	6600 3700 6700 3700
 Wire Wire Line
-	6500 3500 6650 3500
+	6600 3500 6700 3500
 Wire Wire Line
-	6500 3400 6650 3400
+	6600 3400 6700 3400
 Wire Wire Line
-	3950 3000 4100 3000
-Text Label 4100 3100 0    50   ~ 0
+	3900 3000 4000 3000
+Text Label 4000 3100 0    50   ~ 0
 GND
 Wire Wire Line
-	4100 3100 3950 3100
+	4000 3100 3900 3100
 $Comp
 L winsen_zh06_module:Winsen_ZH06_Module A?
 U 1 1 5FB091C1
-P 3350 3400
-F 0 "A?" H 3878 3496 50  0000 L CNN
-F 1 "Winsen_ZH06_Module" H 3878 3405 50  0000 L CNN
-F 2 "" H 3350 4000 50  0001 C CNN
-F 3 "" H 3350 4000 50  0001 C CNN
-	1    3350 3400
+P 3300 3400
+F 0 "A?" H 3828 3496 50  0000 L CNN
+F 1 "Winsen_ZH06_Module" H 3828 3405 50  0000 L CNN
+F 2 "" H 3300 4000 50  0001 C CNN
+F 3 "" H 3300 4000 50  0001 C CNN
+	1    3300 3400
 	-1   0    0    -1  
 $EndComp
-Text Label 4100 3000 0    50   ~ 0
+Text Label 4000 3000 0    50   ~ 0
 5V
-Text Label 6500 3400 2    50   ~ 0
+Text Label 6600 3400 2    50   ~ 0
 MISO
-Text Label 6500 3500 2    50   ~ 0
+Text Label 6600 3500 2    50   ~ 0
 MOSI
-Text Label 6500 3600 2    50   ~ 0
+Text Label 6600 3600 2    50   ~ 0
 SCK
-Text Label 6500 3700 2    50   ~ 0
+Text Label 6600 3700 2    50   ~ 0
 CS
 Wire Wire Line
-	3950 1500 3800 1500
-Text Label 3950 1500 0    50   ~ 0
-SCL
+	3900 1600 3800 1600
 Wire Wire Line
-	3950 1600 3800 1600
-Text Label 3950 1600 0    50   ~ 0
-SDA
-Wire Wire Line
-	3950 1400 3800 1400
-Text Label 3950 1400 0    50   ~ 0
+	3900 1400 3800 1400
+Text Label 3900 1400 0    50   ~ 0
 GND
 Wire Wire Line
-	3800 1300 3950 1300
-Text Label 3950 1300 0    50   ~ 0
+	3800 1300 3900 1300
+Text Label 3900 1300 0    50   ~ 0
 3V3
 $Comp
 L bme280_module:BME280_Module A?
@@ -279,6 +262,97 @@ LDR
 Wire Wire Line
 	3300 2100 3700 2100
 Connection ~ 3300 2100
-Text Label 6500 3300 2    50   ~ 0
+Text Label 6600 3300 2    50   ~ 0
 5V
+Text Label 4500 2700 2    50   ~ 0
+MOSI
+Text Label 3900 1600 0    50   ~ 0
+SDA
+Wire Wire Line
+	3900 1500 3800 1500
+Text Label 3900 1500 0    50   ~ 0
+SCL
+Wire Wire Line
+	4500 2700 4600 2700
+Text Label 4500 2200 2    50   ~ 0
+MISO
+Wire Wire Line
+	4500 2200 4600 2200
+Text Label 4500 2100 2    50   ~ 0
+SCK
+Wire Wire Line
+	4500 2100 4600 2100
+Text Label 4500 2000 2    50   ~ 0
+CS
+Wire Wire Line
+	4500 2000 4600 2000
+Text Label 4500 1700 2    50   ~ 0
+LDR
+Wire Wire Line
+	4500 1700 4600 1700
+Text Label 4000 3300 0    50   ~ 0
+TX2
+Text Label 4500 1900 2    50   ~ 0
+TX2
+Wire Wire Line
+	4500 1900 4600 1900
+Wire Wire Line
+	4000 3300 3900 3300
+Text Label 4000 3400 0    50   ~ 0
+RX2
+Wire Wire Line
+	4000 3400 3900 3400
+Text Label 4500 1800 2    50   ~ 0
+RX2
+Wire Wire Line
+	4500 1800 4600 1800
+Text Label 6100 1500 0    50   ~ 0
+RXS
+Wire Wire Line
+	6100 1500 6000 1500
+Text Label 8300 1500 0    50   ~ 0
+RXS
+Wire Wire Line
+	8300 1500 8200 1500
+Text Label 6100 1900 0    50   ~ 0
+TXS
+Wire Wire Line
+	6100 1900 6000 1900
+Text Label 8300 1400 0    50   ~ 0
+TXS
+Wire Wire Line
+	8200 1400 8300 1400
+Text Label 6100 1800 0    50   ~ 0
+CAL
+Wire Wire Line
+	6100 1800 6000 1800
+Text Label 8300 1700 0    50   ~ 0
+CAL
+Wire Wire Line
+	8300 1700 8200 1700
+$Comp
+L esp32_devkit_v1:ESP32_DEVKIT_V1 U?
+U 1 1 5FB13BB6
+P 5300 2000
+F 0 "U?" H 5300 3215 50  0000 C CNN
+F 1 "ESP32_DEVKIT_V1" H 5300 3124 50  0000 C CNN
+F 2 "" H 5300 2100 50  0001 C CNN
+F 3 "" H 5300 2100 50  0001 C CNN
+	1    5300 2000
+	1    0    0    -1  
+$EndComp
+NoConn ~ 4600 1500
+NoConn ~ 4600 1600
+NoConn ~ 4600 2400
+NoConn ~ 4600 2500
+NoConn ~ 6000 2700
+NoConn ~ 6000 2600
+NoConn ~ 6000 2500
+NoConn ~ 6000 2400
+NoConn ~ 6000 2300
+NoConn ~ 6000 2200
+NoConn ~ 6000 2100
+NoConn ~ 6000 2000
+NoConn ~ 6000 1700
+NoConn ~ 6000 1600
 $EndSCHEMATC
