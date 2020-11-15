@@ -1,0 +1,7 @@
+(sym_lib_table
+  (lib (name esp32_devkit_v1)(type Legacy)(uri ${KIPRJMOD}/lib/esp32_devkit_v1.lib)(options "")(descr ""))
+  (lib (name bme280_module)(type Legacy)(uri ${KIPRJMOD}/lib/bme280_module.lib)(options "")(descr ""))
+  (lib (name winsen_zh06_module)(type Legacy)(uri ${KIPRJMOD}/lib/winsen_zh06_module.lib)(options "")(descr ""))
+  (lib (name senseair_s8_module)(type Legacy)(uri ${KIPRJMOD}/lib/senseair_s8_module.lib)(options "")(descr ""))
+  (lib (name ds3231_module)(type Legacy)(uri ${KIPRJMOD}/lib/ds3231_module.lib)(options "")(descr ""))
+)
