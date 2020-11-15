@@ -5,7 +5,7 @@
 */
 #include "kSeries.h" //include kSeries Library
 
-kSeries K_30(13, 4); //RX TX
+kSeries K_30(13, 26); //RX TX
 
 void setup()
 {
