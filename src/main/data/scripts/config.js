@@ -9,14 +9,14 @@ function setupEvents() {
         db_config.style.display = "none";
         db_nav.style.backgroundColor = "#FFF"
         wifi_config.style.display = "block";
-        wifi_nav.style.backgroundColor = "grey"
+        wifi_nav.style.backgroundColor = "rgba(116, 186, 226, 0.575)";
     })
 
     db_nav.addEventListener("click", () => {
         let db_config = document.getElementsByClassName("db_config")[0];
         let wifi_config = document.getElementsByClassName("wifi_config")[0];
         db_config.style.display = "block";
-        db_nav.style.backgroundColor = "grey"
+        db_nav.style.backgroundColor = "rgba(116, 186, 226, 0.575)";
         wifi_config.style.display = "none";
         wifi_nav.style.backgroundColor = "#FFF"
     })

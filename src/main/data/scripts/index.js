@@ -5,7 +5,9 @@ let data = [
         "Pressão": 2,
         "Humidade": 60,
         "Co2": 40,
-        "Poeira": 30
+        "Poeira": 30,
+        "Dado1": 10,
+        "Dado2": 20
 
     },
     {
@@ -14,7 +16,9 @@ let data = [
         "Pressão": 2,
         "Humidade": 60,
         "Co2": 40,
-        "Poeira": 30
+        "Poeira": 30,
+        "Dado1": 10,
+        "Dado2": 20
 
     },
     {
@@ -23,7 +27,9 @@ let data = [
         "Pressão": 2,
         "Humidade": 60,
         "Co2": 40,
-        "Poeira": 30
+        "Poeira": 30,
+        "Dado1": 10,
+        "Dado2": 20
 
     },
     {
@@ -32,7 +38,9 @@ let data = [
         "Pressão": 2,
         "Humidade": 60,
         "Co2": 40,
-        "Poeira": 30
+        "Poeira": 30,
+        "Dado1": 10,
+        "Dado2": 20
 
     },
     {
@@ -41,7 +49,9 @@ let data = [
         "Pressão": 2,
         "Humidade": 60,
         "Co2": 40,
-        "Poeira": 30
+        "Poeira": 30,
+        "Dado1": 10,
+        "Dado2": 20
     }
 
 ]
