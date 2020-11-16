@@ -29,7 +29,7 @@ function setupEvents() {
         let data_to_send = {};
         data_to_send.sample = document.getElementById("data_sample").value;
         //console.log(data_to_send)
-        sendFilters("http://192.168.0.63/api/db_config", data_to_send)
+        sendFilters("api/config", data_to_send)
     });
 
     let download_db = document.getElementById("download_db");
@@ -53,7 +53,7 @@ function setupEvents() {
         data_to_send.ssid = document.getElementById("ssid").value;
         data_to_send.pass = document.getElementById("pass").value;
         //console.log(data_to_send)
-        sendFilters("http://192.168.0.123:3000/wifi_config", data_to_send);
+        sendFilters("api/config", data_to_send);
     })
 
     // Menu event

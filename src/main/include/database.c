@@ -15,7 +15,7 @@ RTC_DS3231 rtc;
 #define SEALEVELPRESSURE_HPA (1013.25)
 Adafruit_BME280 bme;
 
-#define PIN_LDR 4
+#define PIN_LDR 34
 
 kSeries S8(13, 26); //RX TX
 
@@ -31,11 +31,11 @@ void database_setup()
   Serial.begin(115200);
 
   if (!SD.begin()) {
-    Serial.println("SD Mount Failed");
+    Serial.println("[DB] SD Mount Failed");
     while (1);
   }
 
-  db.open("/sd/data/estacao3.db");
+  db.open("/sd/data/estacao5.db");
 
   JSONVar data;
 
@@ -66,7 +66,7 @@ void database_setup()
   }
 
   //LDR
-  pinMode(PIN_LDR, INPUT);
+  //pinMode(PIN_LDR, INPUT);
 
   //SenseAir S8
   // (no config)
@@ -80,6 +80,7 @@ int database_save_data()
 {
   JSONVar data;
 
+  
   DateTime now = rtc.now();
   char datetime[64] = "%04d-%02d-%02d %02d:%02d:%02d";
   snprintf(datetime, sizeof(datetime), datetime,

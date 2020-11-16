@@ -1,4 +1,5 @@
 #include <WiFiClient.h>
+#include <ESPmDNS.h>
 
 #include <sqlite3.h>
 #include <Arduino_JSON.h>
@@ -12,79 +13,78 @@ JSONHandler* json_handler;
 
 AsyncWebServer server(80);
 
-sqlite3 *db;
-
-void handleNotFound(AsyncWebServerRequest * request)
+void webserver_cb_notfound(AsyncWebServerRequest * request)
 {
   request->send(SPIFFS, "/index.html", "text/html");
 }
 
-void handleRoot(AsyncWebServerRequest * request)
+void webserver_cb_root(AsyncWebServerRequest * request)
 {
-
+  request->send(SPIFFS, "/index.html", "text/html");
 }
 
-void handleAPI(AsyncWebServerRequest * request)
+void webserver_cb_api_config(AsyncWebServerRequest * request)
 {
-  //char msg[610] = "%.02f,%.02f,%.02f";
-  //Serial.println("API");
-  //snprintf(msg, sizeof(msg), msg, BMP280ReadTemperature(), BMP280ReadPressure(), BMP280ReadAltitude());
-  //Serial.println(msg);
-  //request->send(200, "text/plain", msg);
-}
+  Serial.println("[WEB] In request '/api/config'");
 
-void handleDashboard(AsyncWebServerRequest * request)
-{
-  char *zErrMsg = 0;
-  int rc;
-  sqlite3_stmt *res;
-  const char *tail;
-  const char data[] = "Callback function called";
+  JSONVar data = *((JSONVar *)(request->_tempObject));
   
-  char sql[] = "SELECT * FROM museu ORDER BY rowid DESC LIMIT 10 ";
-  rc = sqlite3_prepare_v2(db, sql, strlen(sql), &res, &tail);
+  Serial.println(data);
   
-  if (rc != SQLITE_OK)
-  {
-    String resp = "Failed to fetch data: ";
-    resp += sqlite3_errmsg(db);
-    sqlite3_close(db);
-    Serial.println(resp);
-    
+  JSONVar keys = data.keys();
+
+  if (!data.hasOwnProperty("ssid") || !data.hasOwnProperty("pass")) {
+    Serial.println("Invalid ap-name/ap-pass combination");
+    request->send(400, "text/plain", "Invalid ap-name/ap-pass combination");
     return;
   }
 
-  JSONVar response;
-  int i = 0;
-  while (sqlite3_step(res) == SQLITE_ROW)
+  if (data["ssid"] == _cfg["wifi"]["ssid"])
   {
-    response[i]["Hora_UTC"]     = (const char *)sqlite3_column_text(res, 0);
-    response[i]["Temperatura"]  = sqlite3_column_double(res, 1);
-    response[i]["Humidade"]     = sqlite3_column_double(res, 2);
-    response[i]["Pressão"]      = sqlite3_column_double(res, 3);
-    response[i]["Luminosidade"] = sqlite3_column_double(res, 4);
-    response[i]["Co2"]          = sqlite3_column_double(res, 5);
-    response[i]["Poeira"]       = sqlite3_column_double(res, 6);
+    Serial.printf("[WEB] Already connected in this ssid\n"); 
+    request->send(400, "text/plain", "Already connected");
+    return;
   }
   
-  sqlite3_finalize(res);
-  request->send(200, "application/json", JSON.stringify(response));
+  Serial.println();
+  request->send(200);
+  
+  _cfg["wifi"]["ssid"] = data["ssid"];
+  _cfg["wifi"]["pass"] = data["pass"];
+  
+  config_save();
+  config_execute();
 }
 
-void webServerSetup(sqlite3 *db1)
+void webserver_cb_dashboard(AsyncWebServerRequest * request)
 {
-  //if (MDNS.begin("esp32"))
-  //{
-    //Serial.println("MDNS responder started");
-  //}
+  
+}
 
-  server.serveStatic("/", SPIFFS, "/");
+void webserver_setup()
+{
+  uint64_t chipid = ESP.getEfuseMac();
+  char str[32] = "";
+  snprintf(str, sizeof(str), "estacao-cefet-%04x", (uint16_t)(chipid>>32));
   
-  //server.on("/getdata", handleAPI);
-  server.on("/dashboard", handleDashboard);
+  if (MDNS.begin(str))
+  {
+    Serial.printf("[WEB] MDNS responder started @ http://%s.local\n", str);
+    MDNS.addService("http", "tcp", 80);
+  }
+
   
-  server.onNotFound(handleNotFound);
+  server.serveStatic("/", SPIFFS, "/website/").setDefaultFile("index.html");;
+  
+  JSONHandler *json_config = new JSONHandler();
+
+  json_config->setUri("/api/config");
+  json_config->setMethod(HTTP_POST);
+  json_config->onRequest(webserver_cb_api_config);
+  //server.on("/", webserver_cb_root);
+  
+  server.onNotFound(webserver_cb_root);
   server.begin();
   
-  Serial.println("HTTP server started");
+  Serial.println("[WEB] HTTP server started");
 }

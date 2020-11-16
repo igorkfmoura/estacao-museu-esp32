@@ -12,16 +12,16 @@ JSONVar _cfg;
 
 
 
-int config_execute(JSONVar *cfg);
-int config_wifi(JSONVar *cfg);
-int config_save(JSONVar *cfg);
+int config_execute();
+int config_wifi();
+int config_save();
 int config(const char *path);
 int config_set_default();
 int config_set_wifi_default();
 
-int config_save(JSONVar *cfg)
+int config_save()
 {
-  const char *path = (const char *) (*cfg)["path"];
+  const char *path = (const char *) (_cfg)["path"];
   if (!path)
   {
     Serial.println("[CFG] Failed config save");
@@ -32,7 +32,7 @@ int config_save(JSONVar *cfg)
     return 1;
   }
   
-  if(file.print(JSON.stringify(*cfg)))
+  if(file.print(JSON.stringify(_cfg)))
   {
     Serial.println("[CFG] Config saved");
   } 
@@ -45,17 +45,20 @@ int config_save(JSONVar *cfg)
   return 0;
 }
 
-int config_execute(JSONVar *cfg)
+int config_execute()
 {
-  config_wifi(cfg);
+  Serial.printf("[CFG] Executing: ");
+  Serial.println(_cfg);
+  
+  return config_wifi();
 }
 
-int config_wifi(JSONVar *cfg)
+int config_wifi()
 {
-  const char* ssid = (const char*) (*cfg)["wifi"]["ssid"];
-  const char* pass = (const char*) (*cfg)["wifi"]["pass"];
+  const char* ssid = (const char*) (_cfg)["wifi"]["ssid"];
+  const char* pass = (const char*) (_cfg)["wifi"]["pass"];
   
-  String mode = (const char*) (*cfg)["wifi"]["mode"];
+  String mode = (const char*) (_cfg)["wifi"]["mode"];
   if (mode == "WIFI_STA")
   {
     WiFi.begin(ssid, pass);
@@ -90,6 +93,8 @@ int config_wifi(JSONVar *cfg)
   
   Serial.print("[CFG] IP address: ");
   Serial.println(WiFi.localIP());
+  
+  return 0;
 }
 
 int config_set_wifi_default()
@@ -103,7 +108,7 @@ int config_set_wifi_default()
   _cfg["wifi"]["pass"] = "";
   
   //config_save(&cfg);
-  config_execute(&_cfg);
+  return config_execute();
 }
 
 int config_set_default()
@@ -112,8 +117,8 @@ int config_set_default()
   
   config_set_wifi_default();
   
-  config_save(&_cfg);
-  config_execute(&_cfg);
+  //config_save();
+  return config_execute();
 }
 
 int config(const char *path)
@@ -150,10 +155,10 @@ int config(const char *path)
   
   //buf[i] = '\0';
   JSONVar tmp = JSON.parse(buf);
-  Serial.print("cfg: ");
-  Serial.println(tmp);
+  //Serial.print("cfg: ");
+  //Serial.println(tmp);
   
-  if (JSON.typeof(tmp) != "string")
+  if (!tmp.hasOwnProperty("wifi"))
   {
     Serial.printf("[CFG] Error parsing '%s'\n", path);
     //Serial.println(buf);
@@ -162,9 +167,10 @@ int config(const char *path)
   
   _cfg = tmp;
   
-  if (config_execute(&_cfg))
+  if (config_execute())
   {
     Serial.printf("[CFG] Failed config_execute\n");
+    //return 1;
   }
   
   return 0;
