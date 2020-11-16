@@ -5,7 +5,7 @@
 */
 #include "kSeries.h" //include kSeries Library
 
-kSeries K_30(13, 26); //RX TX
+kSeries S8(13, 26); //RX TX
 
 void setup()
 {
@@ -14,7 +14,7 @@ void setup()
 void loop()
 {
  Serial.print("Co2 ppm = ");
- Serial.println(K_30.getCO2('p'));
+ Serial.println(S8.getCO2('p'));
  
  delay(2000);
 }

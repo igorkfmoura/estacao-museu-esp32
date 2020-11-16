@@ -4,18 +4,18 @@
   Created by Fabian Gutierrez <fega.hg@gmail.com>, March 17, 2017.
   MIT.
 */
-#include <SoftwareSerial.h>
+#include <HardwareSerial.h>
 #include <WinsenZE06.h>
 
-SoftwareSerial SSerial(16, 17); // RX TX
+HardwareSerial HSerial(1);
 WinsenZE06 ZH06;
 
 
 void setup() {
   Serial.begin(115200);
 
-  SSerial.begin(9600);
-  ZH06.begin(&SSerial);
+  HSerial.begin(9600, SERIAL_8N1, 16, 17);
+  ZH06.begin(&HSerial);
 }
 
 void loop() {
