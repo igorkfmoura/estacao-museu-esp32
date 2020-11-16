@@ -286,10 +286,8 @@ Text Label 4500 2000 2    50   ~ 0
 CS
 Wire Wire Line
 	4500 2000 4600 2000
-Text Label 4500 1700 2    50   ~ 0
+Text Label 6100 2400 0    50   ~ 0
 LDR
-Wire Wire Line
-	4500 1700 4600 1700
 Text Label 4000 3300 0    50   ~ 0
 TX2
 Text Label 4500 1900 2    50   ~ 0
@@ -348,11 +346,13 @@ NoConn ~ 4600 2500
 NoConn ~ 6000 2700
 NoConn ~ 6000 2600
 NoConn ~ 6000 2500
-NoConn ~ 6000 2400
 NoConn ~ 6000 2300
 NoConn ~ 6000 2200
-NoConn ~ 6000 2100
 NoConn ~ 6000 2000
 NoConn ~ 6000 1700
 NoConn ~ 6000 1600
+Wire Wire Line
+	6000 2400 6100 2400
+NoConn ~ 4600 1700
+NoConn ~ 6000 2100
 $EndSCHEMATC
