@@ -191,9 +191,15 @@ function eventSetup() {
         data_to_send.date_from = document.getElementById("date_from").value;
         data_to_send.date_to = document.getElementById("date_to").value;
         data_to_send.sample = document.getElementById("sample").value;
-        data_to_send.desc = document.getElementById("desc").checked;
-        console.log(data_to_send);
-        //sendFilters("http://192.168.0.123:3000/search", data_to_send);
+        if (document.getElementById("desc").checked) {
+            data_to_send.order = "DESC";
+        }
+        else {
+            data_to_send.order = " ";
+        }
+
+        //console.log(data_to_send);
+        sendFilters("/api/filters", data_to_send);
     })
 
     let filter_clicker = document.getElementsByClassName("filter_clicker")[0];
