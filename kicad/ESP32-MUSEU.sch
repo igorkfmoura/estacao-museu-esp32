@@ -286,7 +286,7 @@ Text Label 4500 2000 2    50   ~ 0
 CS
 Wire Wire Line
 	4500 2000 4600 2000
-Text Label 6100 2100 0    50   ~ 0
+Text Label 6100 2400 0    50   ~ 0
 LDR
 Text Label 4000 3300 0    50   ~ 0
 TX2
@@ -343,16 +343,38 @@ NoConn ~ 4600 1500
 NoConn ~ 4600 1600
 NoConn ~ 4600 2400
 NoConn ~ 4600 2500
-NoConn ~ 6000 2700
 NoConn ~ 6000 2600
 NoConn ~ 6000 2500
-NoConn ~ 6000 2400
 NoConn ~ 6000 2300
 NoConn ~ 6000 2200
 NoConn ~ 6000 2000
 NoConn ~ 6000 1700
 NoConn ~ 6000 1600
 Wire Wire Line
-	6000 2100 6100 2100
+	6000 2400 6100 2400
 NoConn ~ 4600 1700
+NoConn ~ 6000 2100
+$Comp
+L Switch:SW_Push SW1
+U 1 1 5FB403F5
+P 5300 3600
+F 0 "SW1" H 5300 3885 50  0000 C CNN
+F 1 "SW_Push" H 5300 3794 50  0000 C CNN
+F 2 "" H 5300 3800 50  0001 C CNN
+F 3 "~" H 5300 3800 50  0001 C CNN
+	1    5300 3600
+	1    0    0    -1  
+$EndComp
+Text Label 5000 3600 2    50   ~ 0
+GND
+Text Label 5600 3600 0    50   ~ 0
+EN
+Text Label 6100 2700 0    50   ~ 0
+EN
+Wire Wire Line
+	5600 3600 5500 3600
+Wire Wire Line
+	5100 3600 5000 3600
+Wire Wire Line
+	6100 2700 6000 2700
 $EndSCHEMATC
