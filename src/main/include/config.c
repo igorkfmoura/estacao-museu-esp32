@@ -117,7 +117,7 @@ int config_set_default()
   
   config_set_wifi_default();
   
-  //config_save();
+  config_save();
   return config_execute();
 }
 

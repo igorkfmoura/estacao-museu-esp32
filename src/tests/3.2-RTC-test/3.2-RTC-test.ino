@@ -13,7 +13,7 @@ void setup()
     while (1);
   }
 
-  rtc.adjust(DateTime(__DATE__, __TIME__));
+  rtc.adjust(DateTime(__DATE__, __TIME__) + TimeSpan(5));
 }
 
 void loop()

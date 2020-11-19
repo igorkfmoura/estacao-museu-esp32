@@ -13,7 +13,6 @@ void setup()
 }
 void loop()
 {
- Serial.print("Co2 ppm = ");
  Serial.println(S8.getCO2('p'));
  
  delay(2000);

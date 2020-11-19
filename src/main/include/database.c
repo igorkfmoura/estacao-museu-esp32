@@ -15,7 +15,8 @@ RTC_DS3231 rtc;
 #define SEALEVELPRESSURE_HPA (1013.25)
 Adafruit_BME280 bme;
 
-#define PIN_LDR 34
+#define PIN_LDR   34
+#define PIN_ERROR 33
 
 kSeries S8(13, 26); //RX TX
 
@@ -26,16 +27,63 @@ WinsenZE06 ZH06;
 
 JSONDatabase db;
 
+void blink_pin(int pin, unsigned int n = 1, bool invert = true, int _delay = 200)
+{
+  pinMode(pin, OUTPUT);
+  int state = digitalRead(pin);
+  for (int i = 0; i < n; i++)
+  {
+    digitalWrite(pin, !state ^ invert);
+    delay(_delay);
+    digitalWrite(pin, state ^ invert);
+    delay(_delay);
+  }
+  
+  //todo: restore initial pinMode
+}
+
 void database_setup()
 {
-  Serial.begin(115200);
-
+  
   if (!SD.begin()) {
     Serial.println("[DB] SD Mount Failed");
-    while (1);
+    blink_pin(PIN_ERROR, 1);
+    ESP.restart();
   }
 
-  db.open("/sd/data/estacao5.db");
+  //RTC
+  if (!rtc.begin()) {
+    Serial.println("[DB] Couldn't find RTC");
+    digitalWrite(PIN_ERROR, LOW);
+    blink_pin(PIN_ERROR, 2);
+    ESP.restart();
+  }
+  
+  // We won't be adjusting time on main sketch anymore,
+  // RTC time will be ajusted on test phase.
+  
+  //rtc.adjust(DateTime(__DATE__, __TIME__));
+
+  //BME280
+  int status = bme.begin(0x76);
+  if (!status) {
+    Serial.println("[DB] Could not find a valid BME280 sensor, check wiring, address, sensor ID!");
+    blink_pin(PIN_ERROR, 3);
+    ESP.restart();
+  }
+
+  //LDR
+  pinMode(PIN_LDR, INPUT);
+
+  //SenseAir S8
+  // (no config)
+
+  //ZH06
+  HSerial.begin(9600, SERIAL_8N1, 16, 17);
+  ZH06.begin(&HSerial);
+  
+  
+  db.open("/sd/data/estacao7.db");
 
   JSONVar data;
 
@@ -51,29 +99,6 @@ void database_setup()
 
   db.create_table("sensordata", &data);
 
-  //RTC
-  if (!rtc.begin()) {
-    Serial.println("Couldn't find RTC");
-    while (1);
-  }
-  rtc.adjust(DateTime(__DATE__, __TIME__));
-
-  //BME280
-  int status = bme.begin(0x76);
-  if (!status) {
-    Serial.println("Could not find a valid BME280 sensor, check wiring, address, sensor ID!");
-    while (1);
-  }
-
-  //LDR
-  //pinMode(PIN_LDR, INPUT);
-
-  //SenseAir S8
-  // (no config)
-
-  //ZH06
-  HSerial.begin(9600, SERIAL_8N1, 16, 17);
-  ZH06.begin(&HSerial);
 }
 
 int database_save_data()
@@ -94,6 +119,7 @@ int database_save_data()
   uint8_t err = ZH06.update();
 
   if (err) {
+    blink_pin(PIN_ERROR, 4);
     Serial.println("ZH06 failed");
   }
 
