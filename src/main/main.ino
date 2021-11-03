@@ -18,7 +18,7 @@ void setup()
   //  config_set_default();
   //}
 
-  analogSetSamples(4);
+//  analogSetSamples(4);
   analogSetClockDiv(8);
   
 
